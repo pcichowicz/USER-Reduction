@@ -32,15 +32,19 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
   - Endogeous - Proportion of human reads including duplicates, after trimming adapters and short fragments. (mapping Reads / Number of reads trimmed);
   - Unique mapping - Proportion of human reads excluding duplicates, after trimming adapters and short fragments (unique mapping reads / number of reads trimmed);
   - Effeciency - Proportion of human reads excluding duplicates, out of total reads sequenced (unique reads / total number of reads)l;
-  
+  - xDepth - Depth of coverage of x Chromosome
+  - yDepth - Depth of coverage of y Chromosome
+  - mDepth  - Depth of coverage of mitochonrial Chromosome
+  - authDepth - Depth of automsome Chromosomes
+
 ## Set up
-This pipeline has specific input/output directory structure. Below shows the instructions of how to setup the directories for this pipeline.
+This pipeline has specific input/output directory structure. Below shows the instructions of how to setup the directories for this pipeline. The base directory is the directory that houses the following;
 
 ```
-|-- Project
-|-- Reference
-|-- raw_fqs
-|-- Scripts
+|-- Project/
+|-- Reference/
+|-- raw_fqs/
+|-- Scripts/
 ```
 
 ### Required inputs
@@ -64,7 +68,7 @@ This script will require two user inputs, creating a directory name provided by 
 Once the script is finished, the **.config** file is produced and contains the following information;
 
 project_name="SEA"
-project_dir="/Users/Patrick/aDNA/Project/SEA"
+project_dir="/path_to_main_directory/Project/SEA"
 reference_build="hg19"
 sequencing_type="PE"
 sequencing_platform="illumina"
@@ -88,30 +92,58 @@ and the **project name/ID_fastqs.list** file containing all samples (absolute pa
 /path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058680_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058685_mkri16_U
 
-Directories should be organized as follows;
+Directories now should be organized as follows;
 
 ```
-|-- Project
-   |-- SEA
-      |-- fastp
-      |-- bwa
-      |-- bam
-      |-- mapDamage
-      |-- logs
-      |-- statistics
-|-- Reference
-   |-- hg19 
-|-- raw_fqs
+|-- Project/
+   |-- SEA/
+      |-- fastp/
+      |-- bwa/
+      |-- bam/
+      |-- mapDamage/
+      |-- logs/
+      |-- statistics/
+|-- Reference/
+   |-- hg19/ 
+|-- raw_fqs/
    |-- sample1
    |-- sample2
    |-- sample3
-|-- Scripts
+|-- Scripts/
    |-- setup.script.sh
-   |-- run_script.sh
+   |-- run_scripts.sh
    |-- fastp.sh
    |-- bwa_aln.sh
    |-- mark_duplicates.sh
    |-- mapDamage.sh
    |-- generate_statistics.sh
    |-- sexDetermination.awk
+```
+
+#### Running the `run_scripts.sh`
+This script requires the arguments of tools that the USER would like to perform, such as fastp, bwa_aln, mark_duplicates, etc. Order of arguments does not matter as script is designed to follow logical order of tools. If only mark duplicates is needed, the prior files and steps are required to be already done, fastp, alingment, etc.
+
+eg.
+
+./run_scripts.sh fastp mark_duplicates bwa_aln statistics mapdamage
+
+Script will then only require one user input, the project name (this is the name given to the -n <Project name> from the **setup_script.sh**). Both **.config** and **fastq.list** files will be sourced and use correct input/parameters for tools selected.
+
+Upon finishing, the Project directory should have these files;
+
+```
+|-- Project/
+   |-- SEA/
+      |-- fastp/
+      |-- bwa/
+      |-- bam/
+      |-- mapDamage/
+      |-- logs/
+         |-- SEA_fast.log
+         |-- SEA_bwa-aln.log
+         |-- SEA_bam.log
+         |-- SEA_mark-duplicates.log
+         |-- SEA_mapDamage.log
+      |-- statistics/
+         |-- SEA_stats.txt
 ```

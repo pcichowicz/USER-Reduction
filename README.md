@@ -59,8 +59,28 @@ The aDNA pipeline requires the users to have the following to be located in the 
 * The `Project` directory should be empty (can have project name/ID directories if pipeline has been used before)
 
 #### Running the `setup_script.sh`
-Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference \build>
+Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference build>;
+'eg. ./setup_script.sh -n SEA -s PE -r hg19'
 
-This script will require several user inputs, creating a 'project name/ID.config' (stores all the metadata needed) file that will be used by the following `run_scripts.sh` where depending on which tools selected will use the 'project name/ID.config' metadata. Input prompts are as follows:
+This script will require two user inputs, creating a 'project name/ID.config' (stores all the metadata needed) file that will be used by the following `run_scripts.sh` where depending on which tools selected will use the 'project name/ID.config' metadata. Input prompts are as follows:
 
-*
+* Directory name of fastq files (relative name), 'eg . SEA'
+* Type of sequencing platform used (can be set in script if all reads are from the same platform). 'eg. Illumina'
+
+Once the script is finished, the '.config' file is produced and contains the following information;
+
+* project_name="SEA"
+* project_dir="/Users/Patrick/aDNA/Project/SEA"
+* reference_build="hg19"
+* sequencing_type="PE"
+* sequencing_platform="illumina"
+* rawfqs_path="/path_to_main_directory/raw_fq/SEA"
+* number_samples="<number of samples to be processed"
+* reference_genome="/path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa"
+* fastp_path="/path_to_main_directory/Project/single/fastp"
+* bwa_path="/path_to_main_directory/Project/single/bwa"
+* bam_path="/path_to_main_directory/Project/single/bam"
+* final_path="/path_to_main_directory/Project/single/final"
+* mapDamage_path="/path_to_main_directory/Project/single/mapDamage"
+* logs_path="/path_to_main_directory/Project/single/logs"
+* statistics_path="/path_to_main_directory/Project/single/statistics"

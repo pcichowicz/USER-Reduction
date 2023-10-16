@@ -54,22 +54,22 @@ This pipeline has specific input/output directory structure. Below shows the ins
 The aDNA pipeline requires the users to have the following to be located in the right directories:
 
 * Raw fastq files to be downloaded and stored in the `raw_fqs` directory with project name/ID.
-* Indexed reference genome in the `Reference` directory that will be used. Can have multiple genome builds/species, however other than hg19 will have to be manually added in the 'setup_script.sh'
+* Indexed reference genome in the `Reference` directory that will be used. Can have multiple genome builds/species, however other than hg19 will have to be manually added in the **setup_script.sh**
 * All script files to be placed in the `Scripts` directory
 * The `Project` directory should be empty (can have project name/ID directories if pipeline has been used before)
 
 #### Running the `setup_script.sh`
 Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference build>;
-'eg. ./setup_script.sh -n SEA -s PE -r hg19'
+**eg. ./setup_script.sh -n SEA -s PE -r hg19**
 
-This script will require two user inputs, creating a 'project name/ID.config' (stores all the metadata needed) file that will be used by the following `run_scripts.sh` where depending on which tools selected will use the 'project name/ID.config' metadata. Input prompts are as follows:
+This script will require two user inputs, creating a **project name/ID.config** (stores all the metadata needed) file that will be used by the following `run_scripts.sh` where depending on which tools selected will use the **project name/ID.config** metadata. Input prompts are as follows:
 
-* Directory name of fastq files (relative name), 'eg . SEA'
-* Type of sequencing platform used (can be set in script if all reads are from the same platform). 'eg. Illumina'
+* Directory name of fastq files (relative name), **eg . SEA**
+* Type of sequencing platform used (can be set in script if all reads are from the same platform). **eg. Illumina**
 
-Once the script is finished, the '.config' file is produced and contains the following information;
+Once the script is finished, the **.config** file is produced and contains the following information;
 
-* project_name="SEA"
+> project_name="SEA"
 * project_dir="/Users/Patrick/aDNA/Project/SEA"
 * reference_build="hg19"
 * sequencing_type="PE"
@@ -84,3 +84,13 @@ Once the script is finished, the '.config' file is produced and contains the fol
 * mapDamage_path="/path_to_main_directory/Project/single/mapDamage"
 * logs_path="/path_to_main_directory/Project/single/logs"
 * statistics_path="/path_to_main_directory/Project/single/statistics"
+
+and the **project name/ID_fastqs.list** file containing all samples (absolute path) to be processed, one sample per line;
+eg.
+/path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058645_mkri16_U
+/path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058650_mkri16_U
+/path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058655_mkri16_U
+/path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058675_mkri16_U
+/path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058680_mkri16_U
+/path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058685_mkri16_U
+

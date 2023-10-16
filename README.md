@@ -127,7 +127,7 @@ eg.
 
 ./run_scripts.sh fastp mark_duplicates bwa_aln statistics mapdamage
 
-Script will then only require one user input, the project name (this is the name given to the -n <Project name> from the **setup_script.sh**). Both **.config** and **fastq.list** files will be sourced and use correct input/parameters for tools selected.
+Script will then only require one user input, the project name (this is the name given to the -n <Project name> from the **setup_script.sh**). Both **.config** and **fastq.list** files will be sourced and use metadata (input/parameters/samples) for tools selected.
 
 Upon finishing, the Project directory should have these files;
 
@@ -147,3 +147,6 @@ Upon finishing, the Project directory should have these files;
       |-- statistics/
          |-- SEA_stats.txt
 ```
+
+## R script and data visualizations
+

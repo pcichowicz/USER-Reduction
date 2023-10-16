@@ -56,32 +56,31 @@ Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end r
 
 **eg. ./setup_script.sh -n SEA -s PE -r hg19**
 
-This script will require two user inputs, creating a **project name/ID.config** (stores all the metadata needed) file that will be used by the following `run_scripts.sh` where depending on which tools selected will use the **project name/ID.config** metadata. Input prompts are as follows:
+This script will require two user inputs, creating a directory name provided by argument, **project name/ID.config** (stores all the metadata needed) and **project_name/ID_fastq.list (contains all unique fastq reads) files that will be used by the following `run_scripts.sh`. Input prompts are as follows:
 
-* Directory name of fastq files (relative name), **eg . SEA**
+* Directory name of fastq files (relative name), **eg. SEA**
 * Type of sequencing platform used (can be set in script if all reads are from the same platform). **eg. Illumina**
 
 Once the script is finished, the **.config** file is produced and contains the following information;
 
-> project_name="SEA"
-* project_dir="/Users/Patrick/aDNA/Project/SEA"
-* reference_build="hg19"
-* sequencing_type="PE"
-* sequencing_platform="illumina"
-* rawfqs_path="/path_to_main_directory/raw_fq/SEA"
-* number_samples="<number of samples to be processed"
-* reference_genome="/path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa"
-* fastp_path="/path_to_main_directory/Project/single/fastp"
-* bwa_path="/path_to_main_directory/Project/single/bwa"
-* bam_path="/path_to_main_directory/Project/single/bam"
-* final_path="/path_to_main_directory/Project/single/final"
-* mapDamage_path="/path_to_main_directory/Project/single/mapDamage"
-* logs_path="/path_to_main_directory/Project/single/logs"
-* statistics_path="/path_to_main_directory/Project/single/statistics"
+project_name="SEA"
+project_dir="/Users/Patrick/aDNA/Project/SEA"
+reference_build="hg19"
+sequencing_type="PE"
+sequencing_platform="illumina"
+rawfqs_path="/path_to_main_directory/raw_fq/SEA"
+number_samples="<number of samples to be processed"
+reference_genome="/path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa"
+fastp_path="/path_to_main_directory/Project/single/fastp"
+bwa_path="/path_to_main_directory/Project/single/bwa"
+bam_path="/path_to_main_directory/Project/single/bam"
+final_path="/path_to_main_directory/Project/single/final"
+mapDamage_path="/path_to_main_directory/Project/single/mapDamage"
+logs_path="/path_to_main_directory/Project/single/logs"
+statistics_path="/path_to_main_directory/Project/single/statistics"
 
 and the **project name/ID_fastqs.list** file containing all samples (absolute path) to be processed, one sample per line;
 
-eg.
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058645_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058650_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058655_mkri16_U
@@ -89,3 +88,30 @@ eg.
 /path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058680_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058685_mkri16_U
 
+Directories should be organized as follows;
+
+```
+|-- Project
+   |-- SEA
+      |-- fastp
+      |-- bwa
+      |-- bam
+      |-- mapDamage
+      |-- logs
+      |-- statistics
+|-- Reference
+   |-- hg19 
+|-- raw_fqs
+   |-- sample1
+   |-- sample2
+   |-- sample3
+|-- Scripts
+   |-- setup.script.sh
+   |-- run_script.sh
+   |-- fastp.sh
+   |-- bwa_aln.sh
+   |-- mark_duplicates.sh
+   |-- mapDamage.sh
+   |-- generate_statistics.sh
+   |-- sexDetermination.awk
+```

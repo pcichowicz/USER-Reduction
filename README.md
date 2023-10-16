@@ -150,4 +150,6 @@ Upon finishing, the Project directory should have these files;
 
 ## R script and data visualizations
 
+Here is a sample of a recreated mapDamage misincorporation frequency plot;
+
 ![Custom R script to create mapDamage misincorporation at 5p' (C > T) and 3p' (G > A)](/021130P_mapDamage_misincorpotation.png)

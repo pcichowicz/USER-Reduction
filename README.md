@@ -12,21 +12,14 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
 
 - Fastp - Adapter and trimming quality control of PE data;
   quality and lenght >= 30
-
 - BWA aln - Alignment and mapping
   bwa aln is used to favor the short length of aDNA
-
 - SAMtools - Utility for human readable output. SAM/BAM files
   Sort, merge, extracting mapped reads only, 
-
 - Picard - Marking and removing duplicate reads
-
 - mapDamage - Nucleotide misincorporations patterns
-
 - ContaMix - Mitochondrial contamination
-
 - ANGSD - X chromosome contaminaion
-
 - Summary statistics
   - Total reads - Number of total reads from sequencing;
   - Total trimmed reads - Number of reads after fastp trimming, removing adapter sequences, length ≥ 30, quality score ≥ 30;
@@ -60,6 +53,7 @@ The aDNA pipeline requires the users to have the following to be located in the 
 
 #### Running the `setup_script.sh`
 Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference build>;
+
 **eg. ./setup_script.sh -n SEA -s PE -r hg19**
 
 This script will require two user inputs, creating a **project name/ID.config** (stores all the metadata needed) file that will be used by the following `run_scripts.sh` where depending on which tools selected will use the **project name/ID.config** metadata. Input prompts are as follows:
@@ -86,6 +80,7 @@ Once the script is finished, the **.config** file is produced and contains the f
 * statistics_path="/path_to_main_directory/Project/single/statistics"
 
 and the **project name/ID_fastqs.list** file containing all samples (absolute path) to be processed, one sample per line;
+
 eg.
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058645_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058650_mkri16_U

@@ -40,3 +40,27 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
   - Unique mapping - Proportion of human reads excluding duplicates, after trimming adapters and short fragments (unique mapping reads / number of reads trimmed);
   - Effeciency - Proportion of human reads excluding duplicates, out of total reads sequenced (unique reads / total number of reads)l;
   
+## Set up
+This pipeline has specific input/output directory structure. Below shows the instructions of how to setup the directories for this pipeline.
+
+```
+|-- Project
+|-- Reference
+|-- raw_fqs
+|-- Scripts
+```
+
+### Required inputs
+The aDNA pipeline requires the users to have the following to be located in the right directories:
+
+* Raw fastq files to be downloaded and stored in the `raw_fqs` directory with project name/ID.
+* Indexed reference genome in the `Reference` directory that will be used. Can have multiple genome builds/species, however other than hg19 will have to be manually added in the 'setup_script.sh'
+* All script files to be placed in the `Scripts` directory
+* The `Project` directory should be empty (can have project name/ID directories if pipeline has been used before)
+
+#### Running the `setup_script.sh`
+Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference \build>
+
+This script will require several user inputs, creating a 'project name/ID.config' (stores all the metadata needed) file that will be used by the following `run_scripts.sh` where depending on which tools selected will use the 'project name/ID.config' metadata. Input prompts are as follows:
+
+*

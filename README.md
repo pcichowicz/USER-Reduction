@@ -66,6 +66,7 @@ This script will require two user inputs, creating a directory name provided by 
 * Type of sequencing platform used (can be set in script if all reads are from the same platform). **eg. Illumina**
 
 Once the script is finished, the **.config** file is produced and contains the following information;
+
 ```
 project_name="SEA"
 project_dir="/path_to_main_directory/Project/SEA"
@@ -83,14 +84,17 @@ mapDamage_path="/path_to_main_directory/Project/single/mapDamage"
 logs_path="/path_to_main_directory/Project/single/logs"
 statistics_path="/path_to_main_directory/Project/single/statistics"
 ```
+
 and the **project name/ID_fastqs.list** file containing all samples (absolute path) to be processed, one sample per line;
 
+```
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058645_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058650_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058655_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058675_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058680_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/067890T_cwc_LV2002787650_LV3003058685_mkri16_U
+```
 
 Directories now should be organized as follows;
 

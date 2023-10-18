@@ -40,7 +40,7 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
 ## Set up
 This pipeline has specific input/output directory structure. Below shows the instructions of how to setup the directories for this pipeline. The base directory is the directory that houses the following;
 
-```
+```ShellSession
 |-- Project/
 |-- Reference/
    |-- hg19/
@@ -86,7 +86,7 @@ This script will require two user inputs, creating a directory name provided by 
 
 Once the script is finished, the **.config** file is produced and contains the following information;
 
-```
+```ShellSession
 project_name="SEA"
 project_dir="/path_to_main_directory/Project/SEA"
 reference_build="hg19"
@@ -105,7 +105,7 @@ statistics_path="/path_to_main_directory/Project/single/statistics"
 
 and the **project name/ID_fastqs.list** file containing all samples (absolute path) to be processed, one sample per line;
 
-```
+```ShellSession
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058645_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058650_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058655_mkri16_U
@@ -231,7 +231,7 @@ Statistics file is generated as csv, here I show it in tsv for clarity. Since th
 | 022376B | bamed | LV3003058656 | E | 34732559 | 29481065 | 23598566 | 15221736 | 0.35497199 |
 | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-## R plots and data visualizations
+# R plots and data visualizations
 
 Box plots;
 

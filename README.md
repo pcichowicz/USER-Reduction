@@ -6,7 +6,7 @@ High through sequencing data has revolutionized many different research fields i
 
 # Bioinformatic Pipeline
 
-**(WORK IN PROGRESS TO UPLOAD - Currently improving scripts for more robustness)**
+**(Currently improving scripts for more robustness, mainly plotting and statistics files)**
 
 Here are the steps that were taken to analyze NGS data from aDNA samples that have been treated with USER enzyme to remove DNA damage and clean the DNA for analysis. The pipeline is as follows;
 
@@ -156,7 +156,7 @@ This script requires the arguments of tools that the USER would like to perform,
 
 eg.
 
-./run_scripts.sh fastp mark_duplicates bwa_aln statistics mapdamage
+./run_scripts.sh fastp mark_duplicates bwa_aln mapdamage
 
 Script will then only require one user input, the project name (this is the name given to the -n <Project name> from the **setup_script.sh**). Both **.config** and **fastq.list** files will be sourced and use metadata (input/parameters/samples) for tools selected. Example of fastp, bwa aln and picard tool being used below.
 
@@ -222,6 +222,9 @@ Upon finishing, the Project directory should have these files;
       |-- statistics/
          |-- SEA_stats.txt
 ```
+Statistics file is generated as csv, here I show it in tsv for clarity.
+
+| Sample ID | Sample Age | Library | Treatment | Total Reads | Trimmed Reads | Mapped Reads | Cluster Duplicates | PCR Duplicates | Unique Mapped | pTrimmed Reads | pMapped Reads | Clonality | pCluster Duplicates | pPCR duplicates | Endogenous | pUnique Mapped | Efficiency | Read Length | xDepth | yDepth | mDepth | autDepth |
 
 ## R script and data visualizations
 

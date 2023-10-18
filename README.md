@@ -237,11 +237,11 @@ Box plots;
 
 ![Clonality Boxplot](https://github.com/pcichowicz/USER-Reduction/assets/81156946/6f7856f4-03d6-443a-83f4-46f03155b2f5)
 
-mapDamage misincorporation frequency plot;
+mapDamage misincorporation frequency plot (mapDamage creates plot, but this plot is custom made to my liking);
 
 ![Custom R script to create mapDamage misincorporation at 5p' (C > T) and 3p' (G > A)](/021130P_mapDamage_misincorpotation.png)
 
-USER treated vs non-USER treated, C > T misincorporation at the first 3 positions
+USER treated vs non-USER treated, C > T misincorporation at the first 3 positions;
 
 ![all_EU](https://github.com/pcichowicz/USER-Reduction/assets/81156946/8b0667e9-aa48-435e-a3ed-710709656f53)
 
@@ -249,12 +249,13 @@ USER treated vs non-USER treated, using other South East Asia samples for compar
 
 ![one_EU_sea](https://github.com/pcichowicz/USER-Reduction/assets/81156946/a80cbdd6-5872-4e11-b3e1-aef33108066d)
 
-Ridge plots showing the 3 treatments, mapDamage lambda parameter
+Ridge plots showing the 3 treatments, mapDamage lambda parameter;
 
 ![lambda_para](https://github.com/pcichowicz/USER-Reduction/assets/81156946/963a393b-34d8-430b-ae2a-d9f673fe5112)
 
-Finally a scatter plot, relationship of the DeltaD mapDamage parameter and internal C > T mean damage frequency.
+Finally a scatter plot, relationship of the DeltaD mapDamage parameter and internal C > T mean damage frequency;
 
+![internal_deltad](https://github.com/pcichowicz/USER-Reduction/assets/81156946/ed35da45-ada7-4a8e-97a0-52206c4b55fd)
 
 
 

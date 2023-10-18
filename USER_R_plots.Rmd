@@ -1,0 +1,168 @@
+---
+title: "USER_Projec_Analysis_R"
+author: "Patrick Cichowicz"
+date: '2023-09-24'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+library(kableExtra)
+library(readxl)
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(cowplot)
+library(ggridges)
+library(tibble)
+library(ggsci)
+
+viridis_qualitative_pal7 <- c("#440154FF", "#21908CFF", "#FDE725FF", "#443A83FF", 
+                              "#8FD744FF", "#31688EFF",  "#35B779FF" 
+                              )
+
+scale_colour_discrete <- function(...) {
+  scale_colour_manual(..., values = viridis_qualitative_pal7)
+}
+scale_point_fill_continuous <- function(...) {
+  scale_colour_manual(..., values = viridis_qualitative_pal7)
+}
+scale_color_continuous <- function(...) {
+  scale_colour_manual(..., values = viridis_qualitative_pal7)
+}
+
+theme_set(theme_classic())
+```
+
+```{r Datasheet}
+# csv data that will be produced from pipeline
+clean_data <- read_excel("Datasheets/cleaned_USER_Data.xlsx", sheet = "Sheet1")
+df <- read_excel("Datasheets/cleaned_USER_Data.xlsx", sheet = "Sheet2")
+is_tibble(clean_data)
+```
+
+
+```{r List of variables}
+column_names <- colnames(clean_data)
+column_names
+
+
+  # Create a vector corresponding to proper y labels
+variable_labels <- c(
+  "TotalReads" = "Number of Total Reads",
+  "ReadsTrim" = "Number of Trimmed Reads",
+  "MappingReads" = "Number of Mapping Reads",
+  "DuplicateReads" = "Number of Duplicate Reads",
+  "UniqueReads" = "Number of Unique Reads",
+  "TrimmedProp" = "Proportion of Trimmed Reads",
+  "ReadLengthMean" = "Mean Length of Reads",
+  "Mapping" = "Proportion of Mapping Reads",
+  "Clonality" = "Clonality",
+  "Endogenous" = "Endogenous",
+  "MapUnique" = "Number of Unique Mapped Reads",
+  "Efficiency" = "Efficiency",
+  "AutosomeDepth" = "Autosome Depth",
+  "MTdepth" = "Mitochondrial Depth",
+  "XDepth" = "X Chromosome Depth",
+  "YDepth" = "Y Chromosome Depth"
+)
+  # Vector to exclude categorical data, has other uses.
+exclude_variables <- c("Sample", "Sample_ID", "Age", "Treatment",
+                       "Haplotype", "Haplotype_Pr", "APPROX_MT", "PRECISE_MT",
+                       "R_y", "SE", "95% CI", "Assignment")
+```
+
+```{r}
+
+  # Function to generate vector parameters for plot function
+    # c(data, y_variable, x_variable, y_breaks, y_limits)
+
+generate_plots <- function(user_data){
+  
+  for (colname in column_names){
+    if (colname %in% exclude_variables){
+      # Skip this variable
+      next
+    }
+  
+    y_label <- variable_labels[colname]
+    # Variables to be plotted starts here.
+    gg <- ggplot(data = subset(user_data, !is.na(colname)), aes_string(x = "Treatment", y = colname)) +
+      geom_point(aes(color = Treatment), position = position_jitter(width = 0.05, height = 0.05)) +
+      geom_boxplot(width = 0.3, fill = NA, outlier.colour = NA) +
+      theme(legend.position = "none",
+            axis.text.x = element_text(size = 12),
+            axis.text.y = element_text(size = 12),
+            axis.title.x = element_text(size = 17),
+            axis.title.y = element_text(size = 17)) +
+      ylab(y_label)
+  
+    
+    print(gg)
+    }
+}
+
+generate_plots(clean_data)
+```
+
+```{r , fig.height=7 ,fig.width= 14}
+
+generate_mapdamage <- function(user_data){
+  
+  for (sample in unique(user_data$samp)){
+    
+    c_t <- ggplot(subset(df, samp %in% c(sample)), aes(x=pos, y=C_T5p)) +
+  	  geom_smooth(aes(group=Treatment, colour=Treatment),size=1) +
+  	  labs(x = "5' Position",
+         y = "Frequency of C -> T") +
+      theme(legend.position = "right",
+         legend.title = element_text(size = 15),
+         legend.text = element_text(size = 14),
+	       plot.margin = unit(c(5,0,5,5), "mm"),
+	       plot.title = element_text(vjust = 1),
+	       axis.text.x = element_text(size=10),
+	       axis.title.x = element_text(size=20, margin = margin(15,0,0,0)),
+	       axis.text.y = element_text(size=12),
+	       axis.title.y = element_text(size=20, margin = margin(0,15,0,0))) +
+	    scale_x_continuous(limits = c(1,25), breaks = c(1:25)) +
+      scale_y_continuous(limits = c(0,0.3), breaks = c(0,0.05,0.1,0.15,0.2,0.25,0.3))
+
+    g_a <- ggplot(subset(df, samp %in% c(sample)), aes(x=pos, y=G_A3p)) +
+  	  geom_smooth(aes(group=Treatment, colour=Treatment),size=1) +
+  	  labs(x = "3' Position",
+         y = "Frequency of G -> A") +
+      theme(legend.position = "none",
+	       plot.margin = unit(c(5,5,5,0), "mm"),
+	       axis.text.x = element_text(size=10),
+	       axis.title.x = element_text(size=20, margin = margin(15,0,0,0)),
+	       axis.text.y = element_text(size=12),
+	       axis.title.y.right = element_text(size = 20, margin = margin(0,0,0,15))) +
+      scale_x_reverse(breaks = c(1:25)) +
+	    scale_y_continuous(limits = c(0,0.3), breaks = c(0,0.05,0.1,0.15,0.2,0.25,0.3), position = "right")
+
+  
+    title_plot <- ggdraw() + 
+	  draw_label(sample, fontface = 'bold', x = 0.45) +
+	  theme(plot.margin = margin(0, 0, 0, 7))
+    
+    # Get legend from plot, replot to remove legend to have better placements of plots
+    legend_plot <- get_legend(c_t)
+    c_t <- c_t + theme(legend.position = "none")
+    #g_a <- g_a + theme(legend.position = "none")
+    
+    
+    plots1 <- plot_grid(c_t,g_a)
+    plots1 <- plot_grid(plots1, legend_plot, rel_widths = c(1,0.1))
+    plots2 <- plot_grid(title_plot, plots1, ncol = 1, rel_heights = c(0.1,1))
+    
+    print(plots2)
+  }
+
+}
+
+generate_mapdamage(df)
+```
+

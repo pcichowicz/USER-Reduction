@@ -31,7 +31,7 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
   - Clonality - Proportion of reads that are duplicates ( 1 - unique mapped reads / number of mapping reads);
   - Endogeous - Proportion of human reads including duplicates, after trimming adapters and short fragments. (mapping Reads / Number of reads trimmed);
   - Unique mapping - Proportion of human reads excluding duplicates, after trimming adapters and short fragments (unique mapping reads / number of reads trimmed);
-  - Effeciency - Proportion of human reads excluding duplicates, out of total reads sequenced (unique reads / total number of reads)l;
+  - Effeciency - Proportion of human reads excluding duplicates, out of total reads sequenced (unique reads / total number of reads);
   - xDepth - Depth of coverage of x Chromosome
   - yDepth - Depth of coverage of y Chromosome
   - mDepth  - Depth of coverage of mitochonrial Chromosome
@@ -56,7 +56,7 @@ The aDNA pipeline requires the users to have the following to be located in the 
 * The `Project` directory should be empty (can have project name/ID directories if pipeline has been used before)
 
 #### Running the `setup_script.sh`
-Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference build>;
+Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference-build>;
 
 **eg. ./setup_script.sh -n SEA -s PE -r hg19**
 
@@ -138,7 +138,6 @@ single
 Wed 13:05:57 run_scripts Running fastp.sh script...
 Wed 13:05:57 fastp Running adapter trimming and quality control script for project single
 Wed 13:05:57 fastp >Sample 1 out of 1 - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
-Wed 13:05:57 fastp @fastp --length_required 30 --qualified_quality_phred 30 --in1 /path_to_main_directory/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R1_001.fastq.gz --in2 /path_to_main_directory/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R2_001.fastq.gz --out1 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz --out2 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz --unpaired1 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --unpaired2 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --merge --merged_out /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz --failed_out /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_failed_out.fastq.gz --detect_adapter_for_pe --dont_eval_duplication --report_title '012345P_ia_LV2002787650_LV3003058645_mkri16_U' --html /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.html --json /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.json
 Wed 13:05:57 fastp fastp trimming and quality control finished.
 Wed 13:31:52 run_scripts Running bwa_aln.sh script...
 Wed 13:31:52 bwa_aln Running alignment script - BWA aln & samtools

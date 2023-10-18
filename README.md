@@ -6,7 +6,7 @@ High through sequencing data has revolutionized many different research fields i
 
 # Bioinformatic Pipeline
 
-**(WORK IN PROGRESS TO UPLOAD - Currently improving scripts for more robustness)**
+**(Currently improving scripts for more robustness, mainly plotting and statistics files)**
 
 Here are the steps that were taken to analyze NGS data from aDNA samples that have been treated with USER enzyme to remove DNA damage and clean the DNA for analysis. The pipeline is as follows;
 
@@ -40,7 +40,7 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
 ## Set up
 This pipeline has specific input/output directory structure. Below shows the instructions of how to setup the directories for this pipeline. The base directory is the directory that houses the following;
 
-```
+```ShellSession
 |-- Project/
 |-- Reference/
    |-- hg19/
@@ -86,7 +86,7 @@ This script will require two user inputs, creating a directory name provided by 
 
 Once the script is finished, the **.config** file is produced and contains the following information;
 
-```
+```ShellSession
 project_name="SEA"
 project_dir="/path_to_main_directory/Project/SEA"
 reference_build="hg19"
@@ -105,7 +105,7 @@ statistics_path="/path_to_main_directory/Project/single/statistics"
 
 and the **project name/ID_fastqs.list** file containing all samples (absolute path) to be processed, one sample per line;
 
-```
+```ShellSession
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058645_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058650_mkri16_U
 /path_to_main_directory/raw_fq/Project_name/012345P_ia_LV2002787650_LV3003058655_mkri16_U
@@ -156,7 +156,7 @@ This script requires the arguments of tools that the USER would like to perform,
 
 eg.
 
-./run_scripts.sh fastp mark_duplicates bwa_aln statistics mapdamage
+./run_scripts.sh fastp mark_duplicates bwa_aln mapdamage
 
 Script will then only require one user input, the project name (this is the name given to the -n <Project name> from the **setup_script.sh**). Both **.config** and **fastq.list** files will be sourced and use metadata (input/parameters/samples) for tools selected. Example of fastp, bwa aln and picard tool being used below.
 
@@ -222,9 +222,42 @@ Upon finishing, the Project directory should have these files;
       |-- statistics/
          |-- SEA_stats.txt
 ```
+Statistics file is generated as csv, here I show it in tsv for clarity. Since there are more than 20 headers, only few are shown
 
-## R script and data visualizations
+| Sample ID | Sample Age | Library | Treatment | Total Reads | Trimmed Reads | Mapped Reads | PCR Duplicates | Clonality |
+| --------- | ---------- | ------- | --------- | ----------- | ------------- | ------------ | -------------- | --------- |
+| 015683P | ia | LV3003058645 | U | 30847755 | 27592750 | 20872074 | 5936949 | 0.284444613 |
+| 016054P | cwc | LV3003058689 | U | 48117377 | 41375776 | 33889887 | 13130966 | 0.38745977 |
+| 022376B | bamed | LV3003058656 | E | 34732559 | 29481065 | 23598566 | 15221736 | 0.35497199 |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-Here is a sample of a recreated mapDamage misincorporation frequency plot;
+# R plots and data visualizations
+
+Box plots;
+
+![Clonality Boxplot](https://github.com/pcichowicz/USER-Reduction/assets/81156946/6f7856f4-03d6-443a-83f4-46f03155b2f5)
+
+mapDamage misincorporation frequency plot (mapDamage creates plot, but this plot is custom made to my liking);
 
 ![Custom R script to create mapDamage misincorporation at 5p' (C > T) and 3p' (G > A)](/021130P_mapDamage_misincorpotation.png)
+
+USER treated vs non-USER treated, C > T misincorporation at the first 3 positions;
+
+![all_EU](https://github.com/pcichowicz/USER-Reduction/assets/81156946/8b0667e9-aa48-435e-a3ed-710709656f53)
+
+USER treated vs non-USER treated, using other South East Asia samples for comparison at the first position
+
+![one_EU_sea](https://github.com/pcichowicz/USER-Reduction/assets/81156946/a80cbdd6-5872-4e11-b3e1-aef33108066d)
+
+Ridge plots showing the 3 treatments, mapDamage lambda parameter;
+
+![lambda_para](https://github.com/pcichowicz/USER-Reduction/assets/81156946/963a393b-34d8-430b-ae2a-d9f673fe5112)
+
+Finally a scatter plot, relationship of the DeltaD mapDamage parameter and internal C > T mean damage frequency;
+
+![internal_deltad](https://github.com/pcichowicz/USER-Reduction/assets/81156946/ed35da45-ada7-4a8e-97a0-52206c4b55fd)
+
+
+
+
+

@@ -230,6 +230,7 @@ Statistics file is generated as csv, here I show it in tsv for clarity. Since th
 | 016054P | cwc | LV3003058689 | U | 48117377 | 41375776 | 33889887 | 13130966 | 0.38745977 | ... |
 | 022376B | bamed | LV3003058656 | E | 34732559 | 29481065 | 23598566 | 15221736 | 0.35497199 | ... |
 | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+
 ## R script and data visualizations
 
 Here is a sample of a recreated mapDamage misincorporation frequency plot;

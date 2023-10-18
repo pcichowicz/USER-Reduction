@@ -233,9 +233,30 @@ Statistics file is generated as csv, here I show it in tsv for clarity. Since th
 
 ## R plots and data visualizations
 
-Box plots
+Box plots;
+
 ![Clonality Boxplot](https://github.com/pcichowicz/USER-Reduction/assets/81156946/6f7856f4-03d6-443a-83f4-46f03155b2f5)
 
-Here is a sample of a recreated mapDamage misincorporation frequency plot;
+mapDamage misincorporation frequency plot;
 
 ![Custom R script to create mapDamage misincorporation at 5p' (C > T) and 3p' (G > A)](/021130P_mapDamage_misincorpotation.png)
+
+USER treated vs non-USER treated, C > T misincorporation at the first 3 positions
+
+![all_EU](https://github.com/pcichowicz/USER-Reduction/assets/81156946/8b0667e9-aa48-435e-a3ed-710709656f53)
+
+USER treated vs non-USER treated, using other South East Asia samples for comparison at the first position
+
+![one_EU_sea](https://github.com/pcichowicz/USER-Reduction/assets/81156946/a80cbdd6-5872-4e11-b3e1-aef33108066d)
+
+Ridge plots showing the 3 treatments, mapDamage lambda parameter
+
+![lambda_para](https://github.com/pcichowicz/USER-Reduction/assets/81156946/963a393b-34d8-430b-ae2a-d9f673fe5112)
+
+Finally a scatter plot, relationship of the DeltaD mapDamage parameter and internal C > T mean damage frequency.
+
+
+
+
+
+

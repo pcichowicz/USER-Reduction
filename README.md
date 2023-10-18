@@ -44,6 +44,12 @@ This pipeline has specific input/output directory structure. Below shows the ins
 |-- Project/
 |-- Reference/
    |-- hg19/
+      |-- genome.fa
+      |-- genome.fa.amb
+      |-- genome.fa.ann
+      |-- genome.fa.bwt
+      |-- genome.fa.oac
+      |-- genome.fa.sa
 |-- raw_fqs/
    |-- SEA/
       |-- sample1.fastq.gz
@@ -110,7 +116,7 @@ and the **project name/ID_fastqs.list** file containing all samples (absolute pa
 
 Directories now should be organized as follows;
 
-```
+```ShellSession
 |-- Project/
    |-- SEA/
       |-- SEA.config
@@ -122,20 +128,27 @@ Directories now should be organized as follows;
       |-- logs/
       |-- statistics/
 |-- Reference/
-   |-- hg19/ 
+   |-- hg19/
+      |-- genome.fa
+      |-- genome.fa.amb
+      |-- genome.fa.ann
+      |-- genome.fa.bwt
+      |-- genome.fa.oac
+      |-- genome.fa.sa
 |-- raw_fqs/
-   |-- sample1
-   |-- sample2
-   |-- sample3
+   |-- SEA/
+      |-- sample1.fastq.gz
+      |-- sample2.fastq.gz
 |-- Scripts/
-   |-- setup.script.sh
-   |-- run_scripts.sh
+   |-- aDNA_setup.sh
+   |-- aDNA_run_scripts.sh
    |-- fastp.sh
    |-- bwa_aln.sh
    |-- mark_duplicates.sh
    |-- mapDamage.sh
-   |-- generate_statistics.sh
    |-- sexDetermination.awk
+   |-- generate_statistics.sh
+   |-- colors.txt
 ```
 
 #### Running the `run_scripts.sh`
@@ -157,19 +170,19 @@ Wed 13:05:57 fastp fastp trimming and quality control finished.
 Wed 13:05:57 fastp @fastp --length_required 30 --qualified_quality_phred 30 --in1 /path_to_main_directory/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R1_001.fastq.gz --in2 /path_to_main_directory/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R2_001.fastq.gz --out1 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz --out2 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz --unpaired1 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --unpaired2 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --merge --merged_out /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz --failed_out /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_failed_out.fastq.gz --detect_adapter_for_pe --dont_eval_duplication --report_title '012345P_ia_LV2002787650_LV3003058645_mkri16_U' --html /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.html --json /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.json
 Wed 13:31:52 run_scripts Running bwa_aln.sh script...
 Wed 13:31:52 bwa_aln Running alignment script - BWA aln & samtools
-Wed 13:31:52 bwa_aln >Wed 18 Oct 2023 13:31:52 CEST Sample 1 out of 1; merged reads - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST bwa aln /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz > /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz.sai
-Wed 13:31:52 bwa_aln >Wed 18 Oct 2023 13:31:52 CEST Sample 1 out of 1; paired-end reads 1 & 2 - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST bwa aln /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz > /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz.sai
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST bwa aln /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz > /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz.sai
-Wed 13:31:52 bwa_aln >Wed 18 Oct 2023 13:31:52 CEST Sample 1 out of 1; samse - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST bwa samse -r '@RG	ID:012345P_ia_LV2002787650_LV3003058645_mkri16_U_merged	SM:012345P	CN:CGG	PL:ILLUMINA	LB:LV3003058645	DS:aDNA USER Reduction project' /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz.sai /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz | samtools sort -o /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_merged.bam
-Wed 13:31:52 bwa_aln >Wed 18 Oct 2023 13:31:52 CEST Sample 1 out of 1; sampe - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST bwa sampe -r '@RG	ID:012345P_ia_LV2002787650_LV3003058645_mkri16_U_paired	SM:012345P	CN:CGG	PL:ILLUMINA	LB:LV3003058645	DS:aDNA USER Reduction project' /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz.sai /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz.sai /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz | samtools sort -o /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_paired-reads.bam
-Wed 13:31:52 bwa_aln >Wed 18 Oct 2023 13:31:52 CEST Sample 1 out of 1; samtools merge - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST samtools merge /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U.bam /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U*.bam
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST samtools view -b -F 4 -o /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_mapped.bam /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U.bam
-Wed 13:31:52 bwa_aln @Wed 18 Oct 2023 13:31:52 CEST samtools index -b /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_mapped.bam
+Wed 13:31:52 bwa_aln >Sample 1 out of 1; merged reads - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
+Wed 13:31:52 bwa_aln @bwa aln /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz > /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz.sai
+Wed 13:31:52 bwa_aln >Sample 1 out of 1; paired-end reads 1 & 2 - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
+Wed 13:31:52 bwa_aln @bwa aln /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz > /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz.sai
+Wed 13:31:52 bwa_aln @bwa aln /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz > /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz.sai
+Wed 13:31:52 bwa_aln >Sample 1 out of 1; samse - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
+Wed 13:31:52 bwa_aln @bwa samse -r '@RG	ID:012345P_ia_LV2002787650_LV3003058645_mkri16_U_merged	SM:012345P	CN:CGG	PL:ILLUMINA	LB:LV3003058645	DS:aDNA USER Reduction project' /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz.sai /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz | samtools sort -o /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_merged.bam
+Wed 13:31:52 bwa_aln >Sample 1 out of 1; sampe - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
+Wed 13:31:52 bwa_aln @bwa sampe -r '@RG	ID:012345P_ia_LV2002787650_LV3003058645_mkri16_U_paired	SM:012345P	CN:CGG	PL:ILLUMINA	LB:LV3003058645	DS:aDNA USER Reduction project' /path_to_main_directory/REFERENCE/UCSC/Homo/genome.fa /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz.sai /path_to_main_directory/Project/single/bwa/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz.sai /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz | samtools sort -o /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_paired-reads.bam
+Wed 13:31:52 bwa_aln >Sample 1 out of 1; samtools merge - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
+Wed 13:31:52 bwa_aln @samtools merge /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U.bam /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U*.bam
+Wed 13:31:52 bwa_aln @samtools view -b -F 4 -o /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_mapped.bam /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U.bam
+Wed 13:31:52 bwa_aln @samtools index -b /path_to_main_directory/Project/single/bam/012345P_ia_LV2002787650_LV3003058645_mkri16_U_mapped.bam
 Wed 13:31:52 bwa_aln Finished read alignments and creating bam files
 Wed 13:31:52 run_scripts Running remove_duplicates.sh script...
 Wed 13:31:52 mark_duplicates Running Picard MarkDuplicates
@@ -179,7 +192,7 @@ Wed 13:31:54 mark_duplicates Finished with marking and removing duplicate reads
 
 Upon finishing, the Project directory should have these files;
 
-```
+```ShellSession
 |-- Project/
    |-- SEA/
       |-- fastp/

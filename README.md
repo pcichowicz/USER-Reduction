@@ -131,14 +131,14 @@ eg.
 ./run_scripts.sh fastp mark_duplicates bwa_aln statistics mapdamage
 
 Script will then only require one user input, the project name (this is the name given to the -n <Project name> from the **setup_script.sh**). Both **.config** and **fastq.list** files will be sourced and use metadata (input/parameters/samples) for tools selected.
-
-`#008000`Wed 13:05:52 run_scripts Enter project name for config file:
+```Shell
+Wed 13:05:52 run_scripts Enter project name for config file:
 single
 Wed 13:05:57 run_scripts Running fastp.sh script...
 Wed 13:05:57 fastp Running adapter trimming and quality control script for project single
 Wed 13:05:57 fastp >Sample 1 out of 1 - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
 Wed 13:05:57 fastp @fastp --length_required 30 --qualified_quality_phred 30 --in1 /Users/Patrick/aDNA/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R1_001.fastq.gz --in2 /Users/Patrick/aDNA/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R2_001.fastq.gz --out1 /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz --out2 /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz --unpaired1 /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --unpaired2 /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --merge --merged_out /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz --failed_out /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_failed_out.fastq.gz --detect_adapter_for_pe --dont_eval_duplication --report_title '012345P_ia_LV2002787650_LV3003058645_mkri16_U' --html /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.html --json /Users/Patrick/aDNA/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.json
-
+```
 Wed 13:05:57 fastp fastp trimming and quality control finished.
 
 

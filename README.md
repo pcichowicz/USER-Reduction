@@ -231,7 +231,10 @@ Statistics file is generated as csv, here I show it in tsv for clarity. Since th
 | 022376B | bamed | LV3003058656 | E | 34732559 | 29481065 | 23598566 | 15221736 | 0.35497199 |
 | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-## R script and data visualizations
+## R plots and data visualizations
+
+Box plots
+![Clonality Boxplot](https://github.com/pcichowicz/USER-Reduction/assets/81156946/6f7856f4-03d6-443a-83f4-46f03155b2f5)
 
 Here is a sample of a recreated mapDamage misincorporation frequency plot;
 

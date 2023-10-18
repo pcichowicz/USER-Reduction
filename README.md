@@ -43,8 +43,21 @@ This pipeline has specific input/output directory structure. Below shows the ins
 ```
 |-- Project/
 |-- Reference/
+   |-- hg19/
 |-- raw_fqs/
+   |-- SEA/
+      |-- sample1.fastq.gz
+      |-- sample2.fastq.gz
 |-- Scripts/
+   |-- aDNA_setup.sh
+   |-- aDNA_run.sh
+   |-- fastp.sh
+   |-- bwa_aln.sh
+   |-- mark_duplicates.sh
+   |-- mapDamage.sh
+   |-- sexDetermination.awk
+   |-- generate_statistics.sh
+   |-- colors.txt
 ```
 
 ### Required inputs
@@ -100,6 +113,8 @@ Directories now should be organized as follows;
 ```
 |-- Project/
    |-- SEA/
+      |-- SEA.config
+      |-- SEA_fastqs.list
       |-- fastp/
       |-- bwa/
       |-- bam/

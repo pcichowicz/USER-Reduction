@@ -139,6 +139,7 @@ Wed 13:05:57 run_scripts Running fastp.sh script...
 Wed 13:05:57 fastp Running adapter trimming and quality control script for project single
 Wed 13:05:57 fastp >Sample 1 out of 1 - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
 Wed 13:05:57 fastp fastp trimming and quality control finished.
+Wed 13:05:57 fastp @fastp --length_required 30 --qualified_quality_phred 30 --in1 /path_to_main_directory/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R1_001.fastq.gz --in2 /path_to_main_directory/raw_fq/single/012345P_ia_LV2002787650_LV3003058645_mkri16_U_S1_L004_R2_001.fastq.gz --out1 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_1.fastq.gz --out2 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_out_2.fastq.gz --unpaired1 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --unpaired2 /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_unpaired.fastq.gz --merge --merged_out /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_merged.fastq.gz --failed_out /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U_trimmed_failed_out.fastq.gz --detect_adapter_for_pe --dont_eval_duplication --report_title '012345P_ia_LV2002787650_LV3003058645_mkri16_U' --html /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.html --json /path_to_main_directory/Project/single/fastp/012345P_ia_LV2002787650_LV3003058645_mkri16_U.json
 Wed 13:31:52 run_scripts Running bwa_aln.sh script...
 Wed 13:31:52 bwa_aln Running alignment script - BWA aln & samtools
 Wed 13:31:52 bwa_aln >Wed 18 Oct 2023 13:31:52 CEST Sample 1 out of 1; merged reads - 012345P_ia_LV2002787650_LV3003058645_mkri16_U
@@ -167,15 +168,29 @@ Upon finishing, the Project directory should have these files;
 |-- Project/
    |-- SEA/
       |-- fastp/
+         |-- sample1_trimmed_failed_out.fastq.gz
+         |-- sample1_trimmed_merged.fastq.gz
+         |-- sample1_trimmed_out1.fastq.gz
+         |-- sample1_trimmed_out2.fastq.gz
+         |-- sample1_trimmed_unpaired.fastq.gz
       |-- bwa/
+         |-- sample1_trimmed_merged.fastq.gz.sai
+         |-- sample1_trimmed_out1.fastq.gz.sai
+         |-- sample1_trimmed_out2.fastq.gz.sai
       |-- bam/
+         |-- sample1_paired-reads.bam
+         |-- sample1_merged.bam
+         |-- sample1.bam
+         |-- sample1_mapped.bam
+         |-- sample1_mapped-md.bam
+         |-- sample1_mapped-md.bam.bai
+         |-- sample1_mapped-md.bam.metrics
       |-- mapDamage/
       |-- logs/
          |-- SEA_fast.log
          |-- SEA_bwa-aln.log
          |-- SEA_bam.log
          |-- SEA_mark-duplicates.log
-         |-- SEA_mapDamage.log
       |-- statistics/
          |-- SEA_stats.txt
 ```

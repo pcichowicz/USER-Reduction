@@ -132,7 +132,7 @@ eg.
 
 Script will then only require one user input, the project name (this is the name given to the -n <Project name> from the **setup_script.sh**). Both **.config** and **fastq.list** files will be sourced and use metadata (input/parameters/samples) for tools selected.
 
-`\033[0;92m`Wed 13:05:52 run_scripts Enter project name for config file:
+`#008000`Wed 13:05:52 run_scripts Enter project name for config file:
 single
 Wed 13:05:57 run_scripts Running fastp.sh script...
 Wed 13:05:57 fastp Running adapter trimming and quality control script for project single

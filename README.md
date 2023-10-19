@@ -39,7 +39,7 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
   - Sex - male or female based (SKOGLUND x / y)
   - HaploType - Assignment of mitochondrial haplotype
   - HaploProb - probability of the given haplotype
-  - Contmix 1X estimation (upper/lower bound, mapAutentic values)
+  - Contamix 1X estimation (upper/lower bound, mapAutentic values)
   - Contamix 5X estimation (upper/lower bound, mapAutentic values)
   - ANGSD contamination values (Method 1 and 2)
 
@@ -83,7 +83,7 @@ The aDNA pipeline requires the users to have the following to be located in the 
 * The `Project` directory should be empty (can have project name/ID directories if pipeline has been used before)
 
 #### Running the `setup_script.sh`
-Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference-build>;
+Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference>;
 
 **eg. ./setup_script.sh -n SEA -s PE -r hg19**
 
@@ -160,7 +160,7 @@ Directories now should be organized as follows;
 ```
 
 #### Running the `run_scripts.sh`
-This script requires the arguments of tools that the USER would like to perform, such as fastp, bwa_aln, mark_duplicates, etc. Order of arguments does not matter as script is designed to follow logical order of tools. If only mark duplicates is needed, the prior files and steps are required to be already done, fastp, alingment, etc.
+This script requires the arguments of tools that the USER would like to perform, such as fastp, bwa_aln, mark_duplicates, etc. Order of arguments does not matter as script is designed to follow logical order of tools. If only mark duplicates is selected, the prior files and steps are required to be already done, fastp, alingment, etc.
 
 eg.
 

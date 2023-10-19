@@ -83,7 +83,7 @@ The aDNA pipeline requires the users to have the following to be located in the 
 * The `Project` directory should be empty (can have project name/ID directories if pipeline has been used before)
 
 #### Running the `setup_script.sh`
-Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference>;
+Script requires 3 input arguments, -n <Project name/ID>, -s <Single/Paired-end reads>, and -r <reference> ;
 
 **eg. ./setup_script.sh -n SEA -s PE -r hg19**
 

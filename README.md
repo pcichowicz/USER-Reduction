@@ -13,9 +13,9 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
 - Fastp - Adapter and trimming quality control of PE data;
   quality and lenght >= 30
 - BWA aln - Alignment and mapping
-  bwa aln is used to favor the short length of aDNA
+  bwa aln is used to favor the short length of aDNA (higher precision relative to BWA-mem)
 - SAMtools - Utility for human readable output. SAM/BAM files
-  Sort, merge, extracting mapped reads only, 
+  Sort, merge, extracting mapped reads only, index ...
 - Picard - Marking and removing duplicate reads
 - mapDamage - Nucleotide misincorporations patterns
 - ContaMix - Mitochondrial contamination
@@ -36,7 +36,15 @@ Here are the steps that were taken to analyze NGS data from aDNA samples that ha
   - yDepth - Depth of coverage of y Chromosome
   - mDepth  - Depth of coverage of mitochonrial Chromosome
   - authDepth - Depth of automsome Chromosomes
+  - Sex - male or female based (SKOGLUND x / y)
+  - HaploType - Assignment of mitochondrial haplotype
+  - HaploProb - probability of the given haplotype
+  - Contmix 1X estimation (upper/lower bound, mapAutentic values)
+  - Contamix 5X estimation (upper/lower bound, mapAutentic values)
+  - ANGSD contamination values (Method 1 and 2)
 
+
+  
 ## Set up
 This pipeline has specific input/output directory structure. Below shows the instructions of how to setup the directories for this pipeline. The base directory is the directory that houses the following;
 
